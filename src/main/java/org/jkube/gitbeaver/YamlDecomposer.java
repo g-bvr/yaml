@@ -15,6 +15,7 @@ public class YamlDecomposer {
     private static final String INFO = "meta";
     private static final String VALUE = "value";
     private static final String ELEMENT = "element";
+    private static final String ENTRY = "entry";
     private static final String LEVEL = "level";
     private static final String ORDER = "order";
     private static final String KEY = "key";
@@ -41,7 +42,11 @@ public class YamlDecomposer {
             }
         } else if (node instanceof YamlMap) {
             Map<String, YamlNode> map = ((YamlMap) node).getMap();
-            map.forEach((k, v) -> writeRecursively(path.resolve(k), v, append(yamlPath, k), k, null, level+1));
+            int i = 0;
+            for (Map.Entry<String, YamlNode> e : map.entrySet()) {
+                writeRecursively(path.resolve(ENTRY+getNumberSuffix(i, map.size())), e.getValue(), append(yamlPath, e.getKey()), e.getKey(), null, level+1);
+
+            }
         }
     }
 
