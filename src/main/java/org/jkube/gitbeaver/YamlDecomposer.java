@@ -18,6 +18,7 @@ public class YamlDecomposer {
     private static final String ENTRY = "entry";
     private static final String LEVEL = "level";
     private static final String ORDER = "order";
+    private static final String ANCESTOR_PREFIX = "ancestor-";
     private static final String KEY = "key";
     private static final String PATH = "path";
     private static final String SEP = " ";
@@ -44,8 +45,8 @@ public class YamlDecomposer {
             Map<String, YamlNode> map = ((YamlMap) node).getMap();
             int i = 0;
             for (Map.Entry<String, YamlNode> e : map.entrySet()) {
-                writeRecursively(path.resolve(ENTRY+getNumberSuffix(i, map.size())), e.getValue(), append(yamlPath, e.getKey()), e.getKey(), null, level+1);
-
+                writeRecursively(path.resolve(ENTRY+getNumberSuffix(i, map.size())), e.getValue(), append(yamlPath, e.getKey()), e.getKey(), i, level+1);
+                i++;
             }
         }
     }
@@ -61,7 +62,7 @@ public class YamlDecomposer {
         return result;
     }
 
-    private void writeInfo(Path file, List<String> yamlPath, String key, String value, Integer order, int level) {
+    private void writeInfo(Path file, List<String> yamlPath, String key, String value, int order, int level) {
         List<String> info = new ArrayList<>();
         if (key != null) {
             info.add(KEY + SEP + key);
@@ -70,11 +71,14 @@ public class YamlDecomposer {
             info.add(VALUE+SEP+value);
         }
         info.add(LEVEL+SEP+level);
-        if (order != null) {
-            info.add(ORDER+SEP+order);
-        }
+        info.add(ORDER+SEP+order);
         if (!yamlPath.isEmpty()) {
             info.add(PATH+SEP+String.join(".", yamlPath));
+        }
+        int i = yamlPath.size();
+        for (String ancestor : yamlPath) {
+            info.add(ANCESTOR_PREFIX+ i +SEP+ancestor);
+            i--;
         }
         onException(() -> Files.write(file, info))
                 .fail("Could not write info to "+file);
