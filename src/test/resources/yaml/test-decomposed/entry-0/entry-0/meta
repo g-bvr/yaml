@@ -1,0 +1,6 @@
+key secondlevel
+level 2
+order 0
+path firstlevel.secondlevel
+ancestor-2 firstlevel
+ancestor-1 secondlevel

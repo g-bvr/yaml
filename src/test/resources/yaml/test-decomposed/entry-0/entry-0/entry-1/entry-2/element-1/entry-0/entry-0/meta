@@ -1,0 +1,12 @@
+key key6
+value value6
+level 7
+order 0
+path firstlevel.secondlevel.aMap.key3.1.key5.key6
+ancestor-7 firstlevel
+ancestor-6 secondlevel
+ancestor-5 aMap
+ancestor-4 key3
+ancestor-3 1
+ancestor-2 key5
+ancestor-1 key6

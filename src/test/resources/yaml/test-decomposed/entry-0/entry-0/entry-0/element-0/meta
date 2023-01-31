@@ -1,0 +1,8 @@
+value element1
+level 4
+order 0
+path firstlevel.secondlevel.aList.0
+ancestor-4 firstlevel
+ancestor-3 secondlevel
+ancestor-2 aList
+ancestor-1 0

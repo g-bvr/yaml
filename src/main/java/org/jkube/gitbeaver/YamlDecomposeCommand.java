@@ -14,14 +14,21 @@ import static org.jkube.logging.Log.onException;
  */
 public class YamlDecomposeCommand extends AbstractCommand {
 
+    private static final String YAML = "yaml";
+
+    private static final String TARGET = "target";
+
     public YamlDecomposeCommand() {
-        super(2,2, "yaml", "decompose");
+        super("Decompose a yaml file into a folder tree");
+        commandline("YAML DECOMPOSE "+YAML+" INTO "+TARGET);
+        argument(YAML, "The path to the yaml file (relative to current workspace)");
+        argument(TARGET, "The path of the result folder (relative to current workspace, will be created including ancestors if not present, yet)");
     }
 
     @Override
-    public void execute(Map<String, String> variables, WorkSpace workSpace, List<String> arguments) {
-        Path sourcePath = workSpace.getAbsolutePath(arguments.get(0));
-        Path targetPath = workSpace.getAbsolutePath(arguments.get(1));
+    public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
+        Path sourcePath = workSpace.getAbsolutePath(YAML);
+        Path targetPath = workSpace.getAbsolutePath(TARGET);
         log("Resolving yaml file "+sourcePath+" to "+targetPath);
         FileUtil.createIfNotExists(targetPath.getParent());
         onException(() -> new YamlDecomposer().decompose(sourcePath, targetPath))
