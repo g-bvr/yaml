@@ -19,7 +19,7 @@ public class YamlDecomposeCommand extends AbstractCommand {
 
     public YamlDecomposeCommand() {
         super("Decompose a yaml file into a folder tree");
-        commandline("YAML DECOMPOSE "+YAML+" INTO "+TARGET);
+        commandline("DECOMPOSE YAML "+YAML+" INTO "+TARGET);
         argument(YAML, "The path to the yaml file (relative to current workspace)");
         argument(TARGET, "The path of the result folder (relative to current workspace, will be created including ancestors if not present, yet)");
     }
