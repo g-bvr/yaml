@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 
-import static org.jkube.logging.Log.onException;
-
 public class YamlDecomposeTest {
 
     public static final String SOURCE = "src/test/resources/yaml/test.yaml";

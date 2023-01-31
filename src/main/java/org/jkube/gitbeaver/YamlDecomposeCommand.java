@@ -3,7 +3,6 @@ package org.jkube.gitbeaver;
 import org.jkube.gitbeaver.util.FileUtil;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 import static org.jkube.logging.Log.log;
