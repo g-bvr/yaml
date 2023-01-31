@@ -26,8 +26,8 @@ public class YamlDecomposeCommand extends AbstractCommand {
 
     @Override
     public void execute(Map<String, String> variables, WorkSpace workSpace, Map<String, String> arguments) {
-        Path sourcePath = workSpace.getAbsolutePath(YAML);
-        Path targetPath = workSpace.getAbsolutePath(TARGET);
+        Path sourcePath = workSpace.getAbsolutePath(arguments.get(YAML));
+        Path targetPath = workSpace.getAbsolutePath(arguments.get(TARGET));
         log("Resolving yaml file "+sourcePath+" to "+targetPath);
         FileUtil.createIfNotExists(targetPath.getParent());
         onException(() -> new YamlDecomposer().decompose(sourcePath, targetPath))
