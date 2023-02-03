@@ -5,7 +5,7 @@ import org.jkube.gitbeaver.plugin.SimplePlugin;
 public class YamlPlugin extends SimplePlugin {
 
     public YamlPlugin() {
-        super(YamlDecomposeCommand.class);
+        super("Parses and deconstructs yaml files", YamlDecomposeCommand.class);
     }
 
 }
