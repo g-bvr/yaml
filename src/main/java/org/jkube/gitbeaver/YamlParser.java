@@ -118,9 +118,9 @@ public class YamlParser {
 		String key = firstLine.substring(0, pos).trim();
 		YamlNode value;
 		if (pos == firstLine.length()-1) {
-			if (block.size() < 2) {
-				throw new YamlParsingException("Missing value for key "+key);
-			}
+//			if (block.size() < 2) {
+//				throw new YamlParsingException("Missing value for key "+key);
+//			}
 			value = parseRecursively(block.subList(1, block.size()));
 		} else {
 			if (block.size() > 1) {
