@@ -21,7 +21,7 @@ public class YamlDecomposeCommand extends AbstractCommand {
         super("Decompose a yaml file into a folder tree");
         commandline("DECOMPOSE YAML "+YAML+" INTO "+TARGET);
         argument(YAML, "The path to the yaml file (relative to current workspace)");
-        argument(TARGET, "The path of the result folder (relative to current workspace, will be created including ancestors if not present, yet)");
+        argument(TARGET, "The path of the result folder (relative to current workspace, will be created including ancestors if not present, will be cleared if not empty)");
     }
 
     @Override
@@ -30,6 +30,7 @@ public class YamlDecomposeCommand extends AbstractCommand {
         Path targetPath = workSpace.getAbsolutePath(arguments.get(TARGET));
         log("Resolving yaml file "+sourcePath+" to "+targetPath);
         FileUtil.createIfNotExists(targetPath.getParent());
+        FileUtil.clear(targetPath);
         onException(() -> new YamlDecomposer().decompose(sourcePath, targetPath))
                 .fail("Could not write resolved lines to "+targetPath);
     }
