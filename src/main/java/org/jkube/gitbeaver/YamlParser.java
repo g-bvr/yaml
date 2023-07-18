@@ -30,7 +30,7 @@ public class YamlParser {
 		} else if ((blocks.size() != 1) || (blocks.get(0).size() != 1)) {
 			throw new YamlParsingException("expected a list or a map or a value");
 		} else {
-			return new YamlValue(blocks.get(0).get(0));
+			return new YamlValue(removeTrailingSpaces(blocks.get(0).get(0)));
 		}
 	}
 
@@ -113,7 +113,7 @@ public class YamlParser {
 	}
 
 	private void parseMapEntry(YamlMap map, List<String> block) {
-		String firstLine = block.get(0);
+		String firstLine = removeTrailingSpaces(block.get(0));
 		int pos = firstLine.indexOf(MAP_MARKER);
 		String key = firstLine.substring(0, pos).trim();
 		YamlNode value;
@@ -129,6 +129,13 @@ public class YamlParser {
 			value = new YamlValue(firstLine.substring(pos+1).trim());
 		}
 		map.put(key, value);
+	}
+
+	private String removeTrailingSpaces(String s) {
+		while (s.endsWith(" ")) {
+			s = s.substring(0, s.length()-1);
+		}
+		return s;
 	}
 
 
