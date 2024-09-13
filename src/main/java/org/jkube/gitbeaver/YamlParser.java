@@ -35,8 +35,8 @@ public class YamlParser {
 	}
 
 	private List<List<String>> extractBlocksByIndentation(List<String> lines) {
-		System.out.println("------------------------------------------");
-		lines.forEach(System.out::println);
+		//System.out.println("------------------------------------------");
+		//lines.forEach(System.out::println);
 		List<List<String>> result = new ArrayList<>();
 		if (!lines.isEmpty()) {
 			int firstindent = getIndentation(lines.get(0));
